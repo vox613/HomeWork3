@@ -1,13 +1,11 @@
 package innopolis.homework3;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 
 public class NewMap<K, V> implements Map<K, V> {
     private final int mapCapacity;
     private Bucket[] bucketMass;
-
 
     NewMap(int mapCapacity) {
         this.mapCapacity = mapCapacity;
@@ -16,7 +14,6 @@ public class NewMap<K, V> implements Map<K, V> {
             bucketMass[i] = new Bucket();
         }
     }
-
 
     @Override
     public V put(K key, V value) {
@@ -27,16 +24,10 @@ public class NewMap<K, V> implements Map<K, V> {
         }
     }
 
-
     @Override
     public boolean containsKey(Object key) {
         int index = ((key == null) ? 0 : getIndex(key));
         return (bucketMass[index].takeNode(key) != null);
-    }
-
-    @Override
-    public boolean containsValue(Object value) {
-        return false;
     }
 
     @Override
@@ -45,7 +36,6 @@ public class NewMap<K, V> implements Map<K, V> {
         Node tempNode = bucketMass[index].takeNode(key);
         return (tempNode == null) ? null : (V) tempNode.getValue();
     }
-
 
     @Override
     public int size() {
@@ -67,11 +57,6 @@ public class NewMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public void putAll(Map m) {
-
-    }
-
-    @Override
     public boolean isEmpty() {
         return (size() == 0);
     }
@@ -84,18 +69,52 @@ public class NewMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public Set keySet() {
-        return null;
+    public boolean containsValue(Object value) {
+        Collection<V> val = this.values();
+        return val.contains(value);
     }
 
     @Override
-    public Collection values() {
-        return null;
+    public void putAll(Map m) {
+        Set<Entry<K, V>> es = m.entrySet();
+        for (Entry<K, V> pair : es) {
+            this.put(pair.getKey(), pair.getValue());
+        }
+    }
+
+    @Override
+    public Set<K> keySet() {
+        Set<K> set = new HashSet<>();
+        Set<Entry<K, V>> setEntry = entrySet();
+        for (Entry<K, V> aSetEntry : setEntry) {
+            set.add(aSetEntry.getKey());
+        }
+        return set;
+    }
+
+    @Override
+    public Collection<V> values() {
+        Collection<V> val = new ArrayList<>();
+        Set<Entry<K, V>> setEntry = entrySet();
+        for (Entry<K, V> itr : setEntry) {
+            val.add(itr.getValue());
+        }
+        return val;
     }
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        return null;
+        ArrayList<Entry<K, V>> es;
+        Set<Entry<K, V>> set = new HashSet<>();
+        for (int i = 0; i < mapCapacity; i++) {
+            if (bucketMass[i] != null) {
+                es = bucketMass[i].getPairs();
+                if (es != null) {
+                    set.addAll(es);
+                }
+            }
+        }
+        return set;
     }
 
     @Override
@@ -108,7 +127,6 @@ public class NewMap<K, V> implements Map<K, V> {
         }
         return str.toString();
     }
-
 
     private int getIndex(Object key) {
         return newHash(key.hashCode());

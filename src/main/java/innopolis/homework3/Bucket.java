@@ -1,5 +1,7 @@
 package innopolis.homework3;
 
+import java.util.ArrayList;
+
 public class Bucket<K, V> {
     private Node currentNode;
     private int numOfNodes;
@@ -46,9 +48,23 @@ public class Bucket<K, V> {
     }
 
 
+    public ArrayList<Node<K, V>> getPairs() {
+        ArrayList<Node<K, V>> listNodes = new ArrayList<>();
+        Node currentNodeCopy = currentNode;
+        if (currentNodeCopy != null) {
+            while (currentNodeCopy != null) {
+                listNodes.add(currentNodeCopy);
+                currentNodeCopy = currentNodeCopy.getLinkToNextNode();
+            }
+            return listNodes;
+        } else {
+            return null;
+        }
+    }
+
+
     Node takeNode(K key) {
         Node currentNodeCopy = currentNode;
-
         if (currentNodeCopy != null) {
             while (currentNodeCopy != null) {
                 if (key == null) {
@@ -89,7 +105,6 @@ public class Bucket<K, V> {
         V temp;
         Node currentNodeCopy = currentNode;
         Node prevLink = null;
-
         if (currentNodeCopy != null) {
             while (currentNodeCopy != null) {
                 if (key == null) {
@@ -124,7 +139,7 @@ public class Bucket<K, V> {
         }
     }
 
-    public int getNumOfEntry() {
+    int getNumOfEntry() {
         return numOfNodes;
     }
 

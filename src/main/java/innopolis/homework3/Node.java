@@ -1,13 +1,15 @@
 package innopolis.homework3;
 
-public class Node<K, V> {
+import java.util.Map;
+
+public class Node<K, V> implements Map.Entry<K, V> {
     private K key;
     private V value;
     private int keyHashCode;
     private Node linkToNextNode;
 
 
-    public Node(K key, V value) {
+    Node(K key, V value) {
         this.key = key;
         this.value = value;
         this.linkToNextNode = null;
@@ -22,20 +24,18 @@ public class Node<K, V> {
         return "[" + key + ":" + value + "]";
     }
 
-    void setValue(V value) {
-        this.value = value;
+    public V setValue(V newValue) {
+        V oldValue = value;
+        value = newValue;
+        return oldValue;
     }
 
-    K getKey() {
+    public K getKey() {
         return key;
     }
 
-    V getValue() {
+    public V getValue() {
         return value;
-    }
-
-    int getKeyHashCode() {
-        return keyHashCode;
     }
 
     Node getLinkToNextNode() {
