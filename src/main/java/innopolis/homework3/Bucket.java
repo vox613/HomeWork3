@@ -1,6 +1,6 @@
 package innopolis.homework3;
 
-public class Bucket {
+public class Bucket<K, V> {
     private Node currentNode;
     private int numOfNodes;
 
@@ -10,8 +10,8 @@ public class Bucket {
     }
 
 
-    Object add(Node node) {
-        Object temp;
+    V add(Node node) {
+        V temp;
         Node currentNodeCopy = currentNode;
 
         if (currentNodeCopy != null) {
@@ -19,13 +19,13 @@ public class Bucket {
             while (currentNodeCopy != null) {
                 if (node.getKey() == null) {
                     if (currentNodeCopy.getKey() == null) {
-                        temp = currentNodeCopy.getValue();
+                        temp = (V) currentNodeCopy.getValue();
                         currentNodeCopy.setValue(node.getValue());
                         return temp;
                     }
                 } else {
                     if (node.getKey().equals(currentNodeCopy.getKey())) {
-                        temp = currentNodeCopy.getValue();
+                        temp = (V) currentNodeCopy.getValue();
                         currentNodeCopy.setValue(node.getValue());
                         return temp;
                     }
@@ -46,7 +46,7 @@ public class Bucket {
     }
 
 
-    Node takeNode(Object key) {
+    Node takeNode(K key) {
         Node currentNodeCopy = currentNode;
 
         if (currentNodeCopy != null) {
@@ -85,8 +85,8 @@ public class Bucket {
     }
 
 
-    Object removeNode(Object key) {
-        Object temp;
+    V removeNode(K key) {
+        V temp;
         Node currentNodeCopy = currentNode;
         Node prevLink = null;
 
@@ -94,7 +94,7 @@ public class Bucket {
             while (currentNodeCopy != null) {
                 if (key == null) {
                     if (currentNodeCopy.getKey() == null) {
-                        temp = currentNodeCopy.getValue();
+                        temp = (V) currentNodeCopy.getValue();
                         if (prevLink == null) {
                             currentNode = currentNodeCopy.getLinkToNextNode();
                         } else {
@@ -105,7 +105,7 @@ public class Bucket {
                     }
                 } else {
                     if (key.equals(currentNodeCopy.getKey())) {
-                        temp = currentNodeCopy.getValue();
+                        temp = (V) currentNodeCopy.getValue();
                         if (prevLink == null) {
                             currentNode = currentNodeCopy.getLinkToNextNode();
                         } else {

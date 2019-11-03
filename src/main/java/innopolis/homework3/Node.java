@@ -1,13 +1,13 @@
 package innopolis.homework3;
 
-public class  Node {
-    private Object key;
-    private Object value;
+public class Node<K, V> {
+    private K key;
+    private V value;
     private int keyHashCode;
     private Node linkToNextNode;
 
 
-    Node(Object key, Object value) {
+    public Node(K key, V value) {
         this.key = key;
         this.value = value;
         this.linkToNextNode = null;
@@ -22,15 +22,15 @@ public class  Node {
         return "[" + key + ":" + value + "]";
     }
 
-    void setValue(Object value) {
+    void setValue(V value) {
         this.value = value;
     }
 
-    Object getKey() {
+    K getKey() {
         return key;
     }
 
-    Object getValue() {
+    V getValue() {
         return value;
     }
 

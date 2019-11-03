@@ -1,6 +1,10 @@
 package innopolis.homework3;
 
-public class NewMap {
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+
+public class NewMap<K, V> implements Map<K, V> {
     private final int mapCapacity;
     private Bucket[] bucketMass;
 
@@ -14,29 +18,37 @@ public class NewMap {
     }
 
 
-    Object put(Object key, Object value) throws ArrayIndexOutOfBoundsException {
+    @Override
+    public V put(K key, V value) {
         if (key == null) {
-            return bucketMass[0].add(new Node(key, value));
+            return (V) bucketMass[0].add(new Node<>(key, value));
         } else {
-            return bucketMass[getIndex(key)].add(new Node(key, value));
+            return (V) bucketMass[getIndex(key)].add(new Node<>(key, value));
         }
     }
 
 
-    boolean containsKey(Object key) {
+    @Override
+    public boolean containsKey(Object key) {
         int index = ((key == null) ? 0 : getIndex(key));
         return (bucketMass[index].takeNode(key) != null);
     }
 
+    @Override
+    public boolean containsValue(Object value) {
+        return false;
+    }
 
-    Object get(Object key) {
+    @Override
+    public V get(Object key) {
         int index = ((key == null) ? 0 : getIndex(key));
         Node tempNode = bucketMass[index].takeNode(key);
-        return (tempNode == null) ? null : tempNode.getValue();
+        return (tempNode == null) ? null : (V) tempNode.getValue();
     }
 
 
-    int size() {
+    @Override
+    public int size() {
         int size = 0;
         for (int i = 0; i < mapCapacity; i++) {
             size += bucketMass[i].getNumOfEntry();
@@ -44,29 +56,49 @@ public class NewMap {
         return size;
     }
 
-
-    Object remove(Object key) {
+    @Override
+    public V remove(Object key) {
         int index = (key == null) ? 0 : getIndex(key);
         if (containsKey(key)) {
-            return bucketMass[index].removeNode(key);
+            return (V) bucketMass[index].removeNode(key);
         } else {
             return null;
         }
     }
 
+    @Override
+    public void putAll(Map m) {
 
+    }
+
+    @Override
     public boolean isEmpty() {
         return (size() == 0);
     }
 
-
+    @Override
     public void clear() {
         for (int i = 0; i < mapCapacity; i++) {
             bucketMass[i] = new Bucket();
         }
     }
 
+    @Override
+    public Set keySet() {
+        return null;
+    }
 
+    @Override
+    public Collection values() {
+        return null;
+    }
+
+    @Override
+    public Set<Entry<K, V>> entrySet() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < mapCapacity; i++) {
