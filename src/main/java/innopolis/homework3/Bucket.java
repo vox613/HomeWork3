@@ -85,7 +85,6 @@ public class Bucket {
     }
 
 
-
     Object removeNode(Object key) {
         Object temp;
         Node currentNodeCopy = currentNode;
@@ -96,9 +95,9 @@ public class Bucket {
                 if (key == null) {
                     if (currentNodeCopy.getKey() == null) {
                         temp = currentNodeCopy.getValue();
-                        if(prevLink == null){
+                        if (prevLink == null) {
                             currentNode = currentNodeCopy.getLinkToNextNode();
-                        }else{
+                        } else {
                             prevLink.setLinkToNextNode(currentNodeCopy.getLinkToNextNode());
                         }
                         numOfNodes--;
@@ -107,9 +106,9 @@ public class Bucket {
                 } else {
                     if (key.equals(currentNodeCopy.getKey())) {
                         temp = currentNodeCopy.getValue();
-                        if(prevLink == null){
+                        if (prevLink == null) {
                             currentNode = currentNodeCopy.getLinkToNextNode();
-                        }else{
+                        } else {
                             prevLink.setLinkToNextNode(currentNodeCopy.getLinkToNextNode());
                         }
                         numOfNodes--;
@@ -125,7 +124,7 @@ public class Bucket {
         }
     }
 
-    public int getNumOfEntry(){
+    public int getNumOfEntry() {
         return numOfNodes;
     }
 

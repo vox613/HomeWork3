@@ -1,6 +1,6 @@
 package innopolis.homework3;
 
-public class Node {
+public class  Node {
     private Object key;
     private Object value;
     private int keyHashCode;

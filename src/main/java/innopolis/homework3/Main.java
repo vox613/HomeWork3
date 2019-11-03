@@ -7,74 +7,8 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        /*NewMap newMap = new NewMap(16);
 
-        //newMap.put(22, "22");
-        //newMap.put("rg74", 81);
-        //newMap.put("egwg", 1);
-
-
-        System.out.println(">>> SIze = " + newMap.size());
-
-        for (int i = 0; i < 120; i++) {
-            System.out.println("put(" + i + "," + i + ") = " + newMap.put(i, i));
-            System.out.println(">>> SIze = " + newMap.size());
-        }
-
-
-        System.out.println("put(null, null) = " + newMap.put(null, null));
-        System.out.println("put(null, null) = " + newMap.put(null, 1));
-        System.out.println("put(null, null) = " + newMap.put(112, 1));
-        System.out.println("put(null, null) = " + newMap.put(0, 1));
-        System.out.println("put(null, null) = " + newMap.put(128, "хуй"));
-        System.out.println("put(null, null) = " + newMap.put(15, "хуй"));
-
-        System.out.println(">>> SIze = " + newMap.size());
-
-        System.out.println(newMap.toString());
-
-        System.out.println("Have key 0      = " + newMap.containsKey(0));
-        System.out.println("Have key null   = " + newMap.containsKey(null));
-        System.out.println("Have key 15     = " + newMap.containsKey(15));
-        System.out.println("Have key 11     = " + newMap.containsKey(111));
-        System.out.println("Have key 12345  = " + newMap.containsKey(12345));
-        System.out.println();
-
-        System.out.println("Value for key 0      = " + newMap.get(0));
-        System.out.println("Value for key null   = " + newMap.get(null));
-        System.out.println("Value for key 15     = " + newMap.get(15));
-        System.out.println("Value for key 11     = " + newMap.get(111));
-        System.out.println("Value for key 12345  = " + newMap.get(12345));
-        System.out.println();
-
-
-        System.out.println(newMap.toString());
-        System.out.println(">>> SIze = " + newMap.size());
-        System.out.println();
-        System.out.println("Delete pair with key 0      = " + newMap.remove(0));
-        System.out.println("Delete pair with key null   = " + newMap.remove(null));
-        System.out.println("Delete pair with key 15     = " + newMap.remove(15));
-        System.out.println("Delete pair with key 11     = " + newMap.remove(111));
-        System.out.println("Delete pair with key 12345  = " + newMap.remove(12345));
-        System.out.println();
-        System.out.println(newMap.toString());
-        System.out.println(">>> SIze = " + newMap.size());
-        System.out.println();
-
-        for (int i = 0; i < 256; i+=16) {
-            System.out.println("Delete pair with key " + i + "  = " + newMap.remove(i));
-        }
-
-        System.out.println(newMap.toString());
-        System.out.println(">>> SIze = " + newMap.size());
-        System.out.println();
-
-        //newMap.put(16, 0);
-        //System.out.println(newMap.toString());
-
-*/
-
-
+        Map<String, Integer> maps = new HashMap<>();
 
         NewMap newMap = new NewMap(16);
         System.out.println("\n>>>  Empty map  <<<");
@@ -122,6 +56,20 @@ public class Main {
         System.out.println("Remove pair with key 852  = " + newMap.remove("852"));
         System.out.println("Get pair with key 852     = " + newMap.get("852"));
 
+
+        System.out.println("\n>>>  isEmpty & clear test  <<<");
+        System.out.println("Map before removing :");
+        System.out.println(newMap.toString());
+        System.out.println("isEmpty = " + newMap.isEmpty());
+        System.out.println("Size   - " + newMap.size());
+        System.out.println("call clear() !");
+        newMap.clear();
+        System.out.println("\nMap after removing :");
+        System.out.println(newMap.toString());
+        System.out.println("isEmpty = " + newMap.isEmpty());
+        System.out.println("Size   - " + newMap.size());
+
+
         System.out.println("\n>>>  Remove test  <<<");
         System.out.println("Map before removing :");
         System.out.println(newMap.toString());
@@ -145,7 +93,6 @@ public class Main {
 
 
         System.out.println("\nSize   - " + newMap.size());
-
 
 
     }

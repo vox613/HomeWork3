@@ -36,7 +36,6 @@ public class NewMap {
     }
 
 
-
     int size() {
         int size = 0;
         for (int i = 0; i < mapCapacity; i++) {
@@ -56,11 +55,21 @@ public class NewMap {
     }
 
 
+    public boolean isEmpty() {
+        return (size() == 0);
+    }
+
+
+    public void clear() {
+        for (int i = 0; i < mapCapacity; i++) {
+            bucketMass[i] = new Bucket();
+        }
+    }
+
 
     public String toString() {
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < mapCapacity; i++) {
-            //System.out.println("Bucket " + i + " : " + bucketMass[i].toString());
             str.append("Bucket ").append(i).append(" : ");
             str.append(bucketMass[i].toString());
             str.append("\n");
