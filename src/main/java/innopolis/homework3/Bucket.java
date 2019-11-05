@@ -1,6 +1,8 @@
 package innopolis.homework3;
 
 import java.util.ArrayList;
+import java.util.Map;
+
 
 public class Bucket<K, V> {
     private Node currentNode;
@@ -48,8 +50,8 @@ public class Bucket<K, V> {
     }
 
 
-    public ArrayList<Node<K, V>> getPairs() {
-        ArrayList<Node<K, V>> listNodes = new ArrayList<>();
+    public ArrayList<Map.Entry<K, V>> getPairs() {
+        ArrayList<Map.Entry<K, V>> listNodes = new ArrayList<>();
         Node currentNodeCopy = currentNode;
         if (currentNodeCopy != null) {
             while (currentNodeCopy != null) {

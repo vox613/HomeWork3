@@ -20,9 +20,8 @@ public class Node<K, V> implements Map.Entry<K, V> {
         }
     }
 
-    public String toString() {
-        return "[" + key + ":" + value + "]";
-    }
+    public String toString() { return "[" + key + ":" + value + "]"; }
+
 
     public V setValue(V newValue) {
         V oldValue = value;

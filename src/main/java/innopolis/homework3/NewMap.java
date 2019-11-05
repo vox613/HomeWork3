@@ -6,6 +6,7 @@ import java.util.*;
 public class NewMap<K, V> implements Map<K, V> {
     private final int mapCapacity;
     private Bucket[] bucketMass;
+    private Set<Map.Entry<K, V>> newEntrySet = new HashSet<>();
 
     NewMap(int mapCapacity) {
         this.mapCapacity = mapCapacity;
@@ -17,10 +18,17 @@ public class NewMap<K, V> implements Map<K, V> {
 
     @Override
     public V put(K key, V value) {
+        V pastValue;
         if (key == null) {
-            return (V) bucketMass[0].add(new Node<>(key, value));
+            pastValue = (V) bucketMass[0].add(new Node<>(key, value));
+            //this.newEntrySet = this.
+            entrySet();
+            return pastValue;
         } else {
-            return (V) bucketMass[getIndex(key)].add(new Node<>(key, value));
+            pastValue = (V) bucketMass[getIndex(key)].add(new Node<>(key, value));
+            //this.newEntrySet = this.
+            entrySet();
+            return pastValue;
         }
     }
 
@@ -49,8 +57,11 @@ public class NewMap<K, V> implements Map<K, V> {
     @Override
     public V remove(Object key) {
         int index = (key == null) ? 0 : getIndex(key);
+        V removedValue;
         if (containsKey(key)) {
-            return (V) bucketMass[index].removeNode(key);
+            removedValue = (V) bucketMass[index].removeNode(key);
+            entrySet();
+            return removedValue;
         } else {
             return null;
         }
@@ -66,6 +77,7 @@ public class NewMap<K, V> implements Map<K, V> {
         for (int i = 0; i < mapCapacity; i++) {
             bucketMass[i] = new Bucket();
         }
+        entrySet();
     }
 
     @Override
@@ -104,17 +116,29 @@ public class NewMap<K, V> implements Map<K, V> {
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        ArrayList<Entry<K, V>> es;
-        Set<Entry<K, V>> set = new HashSet<>();
+        ArrayList<Map.Entry<K, V>> es;
+        if (newEntrySet != null) {
+            newEntrySet.clear();
+        }
         for (int i = 0; i < mapCapacity; i++) {
             if (bucketMass[i] != null) {
                 es = bucketMass[i].getPairs();
                 if (es != null) {
-                    set.addAll(es);
+                    for (Map.Entry<K, V> pair : es) {
+                        if (pair != null) {
+                            this.newEntrySet.add(pair);
+                            /*if(newEntrySet == null){
+                                this.newEntrySet.add(pair);
+
+                            }else{
+                                this.newEntrySet.add(pair);
+                            }*/
+                        }
+                    }
                 }
             }
         }
-        return set;
+        return newEntrySet;
     }
 
     @Override
@@ -127,6 +151,7 @@ public class NewMap<K, V> implements Map<K, V> {
         }
         return str.toString();
     }
+
 
     private int getIndex(Object key) {
         return newHash(key.hashCode());
